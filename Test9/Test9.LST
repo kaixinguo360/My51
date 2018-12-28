@@ -1,0 +1,74 @@
+C51 COMPILER V9.01   TEST9                                                                 12/20/2018 16:03:10 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE TEST9
+OBJECT MODULE PLACED IN Test9.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE Test9.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          
+   3          #define uint unsigned int
+   4          #define uchar unsigned char
+   5          
+   6          sbit LED1 = P0^0; //用P3^0来控制led
+   7          sbit BUZZER = P0^1; //用p3.1口控制蜂鸣器
+   8          sbit SKEY1 = P3^2; //按键
+   9          uint count_int; //计数指针
+  10          
+  11          void delay(uint c) //延时1ms
+  12          {
+  13   1              uint x, y;
+  14   1              for(x=c; x>0; x--)
+  15   1                      for(y=110; y>0; y--); 
+  16   1      }
+  17          
+  18          void control(uint count_int) 
+  19          {
+  20   1              uint i;
+  21   1              for(i=0; i<=count_int; i++) //函数循环i次
+  22   1              {
+  23   2                      LED1 = 0;
+  24   2                      BUZZER = 0; //灯亮，蜂鸣器响 
+  25   2                      delay(500); //延时0.5s
+  26   2                      LED1 = 1;
+  27   2                      BUZZER = 1;  
+  28   2                      delay(500); 
+  29   2              }
+  30   1      }
+  31          
+  32          void s_timer0() interrupt 0 using 0 //中断0
+  33          {
+  34   1              EA = 0; //屏蔽其他中断请求 
+  35   1              control(count_int); //调用子程序 
+  36   1              count_int++; 
+  37   1              delay(50);
+  38   1              if(count_int >= 10) //若count为十则结束
+  39   1                      count_int = 0;
+  40   1              EA = 1; //开放中断
+  41   1      }
+  42          
+  43          void main()
+  44          {
+  45   1              EA = 1; //开放中断
+  46   1              EX0 = 1; //允许外部中断0中断 
+  47   1              IT0 = 0; //外部中断0为电平触发方式 02
+  48   1              while(1); //循环执行，等待循环
+  49   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    143    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+C51 COMPILER V9.01   TEST9                                                                 12/20/2018 16:03:10 PAGE 2   
+
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

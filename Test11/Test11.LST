@@ -1,0 +1,134 @@
+C51 COMPILER V9.01   TEST11                                                                12/20/2018 17:25:24 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE TEST11
+OBJECT MODULE PLACED IN Test11.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE Test11.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include <reg51.h>
+   2          
+   3          #define uchar unsigned char
+   4          #define uint  unsigned int
+   5          
+   6          uchar bm[]={0x1b,0x13,0x0b,0x03,0x1a,0x12,0x0a,0x02,0x19,0x11,0x09,0x01,0x18,0x10,0x08,0x00};
+   7          
+   8          unsigned char digit[5];
+   9          unsigned char key_number, j, k,mk;    //mk为按键次数计数值
+  10          unsigned int tmr;
+  11          unsigned long wait_cnter;
+  12          
+  13          sbit cs=P1^0; 
+  14          sbit clk=P1^1; 
+  15          sbit dat=P1^2; 
+  16          sbit key=P1^3; 
+  17          
+  18          
+  19          void long_delay(void) // 长延时
+  20          {
+  21   1              unsigned char i;
+  22   1              for (i=0;i<0x30;i++);
+  23   1      }
+  24          
+  25          void short_delay(void) // 短暂延时
+  26          {
+  27   1              unsigned char i;
+  28   1              for (i=0;i<8;i++);
+  29   1      }
+  30          
+  31          void send_byte( unsigned char out_byte) // 发送一个字节
+  32          {
+  33   1              unsigned char i;
+  34   1              cs=0;     //芯片使能
+  35   1              long_delay();
+  36   1              for (i=0;i<8;i++)   //分8次移入数据
+  37   1              {
+  38   2                      if (out_byte&0x80)   //先传高位
+  39   2                      { 
+  40   3                              dat=1;
+  41   3                      }
+  42   2                      else
+  43   2                      {
+  44   3                              dat=0;
+  45   3                      }
+  46   2                      clk=1;
+  47   2                      short_delay();
+  48   2                      clk=0;
+  49   2                      short_delay();
+  50   2                      out_byte=out_byte*2;   //数据左移
+  51   2              }
+  52   1              dat=0;
+  53   1      }
+  54          
+  55          unsigned char receive_byte(void) // 接收一个字节
+C51 COMPILER V9.01   TEST11                                                                12/20/2018 17:25:24 PAGE 2   
+
+  56          {
+  57   1              unsigned char i, in_byte;
+  58   1              dat=1; 
+  59   1              long_delay();
+  60   1              for (i=0;i<8;i++)   //分8次读入数据高位在前
+  61   1              {
+  62   2                      clk=1;
+  63   2                      short_delay();
+  64   2                      in_byte=in_byte*2; //数据左移
+  65   2                      if (dat)
+  66   2                      {
+  67   3                              in_byte=in_byte|0x01;
+  68   3                      }
+  69   2                      clk=0;
+  70   2                      short_delay();
+  71   2              }
+  72   1              dat=0;
+  73   1              return (in_byte);
+  74   1      }
+  75          
+  76          void write7279(unsigned char cmd, unsigned char dta) // 写入到HD7279
+  77          {
+  78   1              send_byte (cmd);
+  79   1              send_byte (dta);
+  80   1      } 
+  81          
+  82          unsigned char read7279(unsigned char command) // 从HD7279读出
+  83          {
+  84   1              send_byte(command);
+  85   1              return(receive_byte());
+  86   1      }
+  87          
+  88          void main(){
+  89   1              uchar keyboard, i, num;
+  90   1              send_byte(0xa4);    //全部复位指令
+  91   1              while(1){
+  92   2                      if(key == 0){
+  93   3                              send_byte(0x15);           //读键盘指令
+  94   3                              keyboard = receive_byte();   //接收键盘数据
+  95   3                              // P0=num;
+  96   3                              for(i=0; i<16; i++){
+  97   4                                      if(keyboard == bm[i]){
+  98   5                                              num = i;
+  99   5                                              break;
+ 100   5                                      }
+ 101   4                              }
+ 102   3                              send_byte(0xa1);
+ 103   3                              write7279(0xc8, num);
+ 104   3                              while(key == 0);
+ 105   3                      }
+ 106   2              }  
+ 107   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    158    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     31    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+C51 COMPILER V9.01   TEST11                                                                12/20/2018 17:25:24 PAGE 3   
+
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

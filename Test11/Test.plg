@@ -1,0 +1,75 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+D:\单片机实验\Test11\Test.uvproj
+Project File Date:  12/20/2018
+
+<h2>Output:</h2>
+Build target 'Target 1'
+compiling Test11.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_READ7279?TEST11
+Program Size: data=44.0 xdata=0 code=337
+creating hex file from "Test"...
+"Test" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling Test11.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_READ7279?TEST11
+Program Size: data=42.0 xdata=0 code=320
+creating hex file from "Test"...
+"Test" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_READ7279?TEST11
+Program Size: data=42.0 xdata=0 code=320
+creating hex file from "Test"...
+"Test" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_READ7279?TEST11
+Program Size: data=42.0 xdata=0 code=320
+creating hex file from "Test"...
+"Test" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_READ7279?TEST11
+Program Size: data=42.0 xdata=0 code=320
+creating hex file from "Test"...
+"Test" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling Test11.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_READ7279?TEST11
+Program Size: data=42.0 xdata=0 code=320
+creating hex file from "Test"...
+"Test" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling Test11.c...
+TEST11.C(33): warning C206: 'send_byte': missing function-prototype
+TEST11.C(33): error C267: 'send_byte': requires ANSI-style prototype
+Target not created
+Build target 'Target 1'
+compiling Test11.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_READ7279?TEST11
+Program Size: data=40.0 xdata=0 code=320
+creating hex file from "Test"...
+"Test" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling Test11.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_READ7279?TEST11
+Program Size: data=40.0 xdata=0 code=320
+creating hex file from "Test"...
+"Test" - 0 Error(s), 1 Warning(s).

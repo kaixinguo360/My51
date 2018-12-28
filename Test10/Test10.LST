@@ -1,0 +1,149 @@
+C51 COMPILER V9.01   TEST10                                                                12/20/2018 17:10:58 PAGE 1   
+
+
+C51 COMPILER V9.01, COMPILATION OF MODULE TEST10
+OBJECT MODULE PLACED IN Test10.OBJ
+COMPILER INVOKED BY: C:\Keil\C51\BIN\C51.EXE Test10.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include<stdio.h>
+   3          #include <absacc.h> // 可使用其中定义的宏来访问绝对地址
+   4          
+   5          #define uchar unsigned char
+   6          #define uint  unsigned int
+   7          
+   8          #define PA    XBYTE[0x7FFC] //PA指代外部数据存储器7FFCh的地址
+   9          #define COM   XBYTE[0x7FFF] //由P0 P2口联合输出地址
+  10          
+  11          #define EW_ON   0xDE //东西绿灯亮
+  12          #define EW_OFF   0xDF //东西绿灯灭
+  13          #define SN_ON   0xF3 //南北绿灯亮
+  14          #define SN_OFF   0xFB //南北绿灯灭
+  15          
+  16          uint temp;
+  17          uchar a;
+  18          
+  19          void init_8255()
+  20          {
+  21   1              COM=0x80;
+  22   1      }
+  23          
+  24          void delay_500ms() //延时500MS子程序
+  25          {
+  26   1              uint i,j;
+  27   1              for(i=500;i>0;i--)
+  28   1                      for(j=120;j>0;j--);
+  29   1      }
+  30          
+  31          void delay_1s() //延时1S子程序
+  32          {
+  33   1              uint i,j;
+  34   1              for(i=1000;i>0;i--)
+  35   1                      for(j=120;j>0;j--);
+  36   1      }
+  37          
+  38          void show(uint a) //显示子程序
+  39          {
+  40   1              SCON=0x00; //工作模式0
+  41   1              SBUF=a;    //将变量a的值送给缓存寄存器
+  42   1              while(!TI) //等待发送是否完成
+  43   1                      TI=0;  //中断标志位清零
+  44   1      }
+  45          
+  46          void main()
+  47          {
+  48   1              init_8255();
+  49   1              TMOD=0x01; //设定工作模式1
+  50   1              EA=1;      //开放中断
+  51   1              ET0=1;     //允许T0中断
+  52   1              TF0=0;     //定时器0溢出标志位
+  53   1              while(1)
+  54   1              {
+  55   2                      a=0x26;
+C51 COMPILER V9.01   TEST10                                                                12/20/2018 17:10:58 PAGE 2   
+
+  56   2                      for(temp=25;temp>19;temp--) //绿灯倒计时 25-20
+  57   2                      {
+  58   3                              a=a-1;
+  59   3                              PA=EW_ON; //东西绿灯亮
+  60   3                              show(a);
+  61   3                              delay_1s();
+  62   3                      }
+  63   2                      a=0x1a;
+  64   2                      for(temp=19;temp>9;temp--) //绿灯倒计时 19-10
+  65   2                      {
+  66   3                              a=a-1;
+  67   3                              PA=EW_ON;
+  68   3                              show(a);
+  69   3                              delay_1s();
+  70   3                      }
+  71   2                      a=0x0a;
+  72   2                      for(temp=9;temp>0;temp--) //绿灯倒计时 9-0
+  73   2                      {
+  74   3                              a=a-1;
+  75   3                              PA=EW_ON;
+  76   3                              show(a);
+  77   3                              delay_1s();
+  78   3                      }
+  79   2                      for(temp=5;temp>0;temp--) //绿灯闪烁 5s
+  80   2                      {
+  81   3                              a=0;     //当计时值为0时闪烁
+  82   3                              show(a);
+  83   3                              PA=EW_OFF; //东西绿灯灭
+  84   3                              delay_500ms(); //延时0.5s
+  85   3                              PA=EW_ON; //东西绿灯亮
+  86   3                              delay_500ms(); //延时0.5s
+  87   3                      }
+  88   2                      a=0x26;
+  89   2                      for(temp=25;temp>19;temp--) //绿灯倒计时 25-20
+  90   2                      {
+  91   3                              a=a-1;
+  92   3                              PA=SN_ON; //南北绿灯亮
+  93   3                              show(a);
+  94   3                              delay_1s();
+  95   3                      }
+  96   2                      a=0x1a;
+  97   2                      for(temp=19;temp>9;temp--) //绿灯倒计时 19-10
+  98   2                      {
+  99   3                              a=a-1;
+ 100   3                              PA=SN_ON;
+ 101   3                              show(a);
+ 102   3                              delay_1s();
+ 103   3                      }
+ 104   2                      a=0x0a;
+ 105   2                      for(temp=9;temp>0;temp--) //绿灯倒计时 9-0
+ 106   2                      {
+ 107   3                              a=a-1;
+ 108   3                              PA=SN_ON;
+ 109   3                              show(a);
+ 110   3                              delay_1s();
+ 111   3                      }
+ 112   2                      for(temp=5;temp>0;temp--) //绿灯闪烁 5s
+ 113   2                      {
+ 114   3                              a=0; //当计时值为0时闪烁
+ 115   3                              show(a);
+ 116   3                              PA=SN_OFF; //南北绿灯灭
+ 117   3                              delay_500ms(); //延时0.5s
+C51 COMPILER V9.01   TEST10                                                                12/20/2018 17:10:58 PAGE 3   
+
+ 118   3                              PA=SN_ON; //南北绿灯亮
+ 119   3                              delay_500ms(); //延时0.5s
+ 120   3                      }          
+ 121   2              }
+ 122   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    402    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      3    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

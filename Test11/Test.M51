@@ -1,0 +1,225 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        12/20/2018  17:25:24  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL\C51\BIN\BL51.EXE Test11.obj TO Test
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  Test11.obj (TEST11)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+  C:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  Test (TEST11)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     001FH     UNIT         ?DT?TEST11
+            IDATA   0027H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     0033H     UNIT         ?PR?MAIN?TEST11
+            CODE    08BFH     0028H     UNIT         ?PR?_SEND_BYTE?TEST11
+            CODE    08E7H     0024H     UNIT         ?PR?RECEIVE_BYTE?TEST11
+            CODE    090BH     0013H     UNIT         ?C_INITSEG
+            CODE    091EH     000AH     UNIT         ?PR?_WRITE7279?TEST11
+            CODE    0928H     0007H     UNIT         ?PR?LONG_DELAY?TEST11
+            CODE    092FH     0007H     UNIT         ?PR?SHORT_DELAY?TEST11
+            CODE    0936H     0007H     UNIT         ?PR?_READ7279?TEST11
+
+
+
+OVERLAY MAP OF MODULE:   Test (TEST11)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?TEST11
+  +--> ?C_INITSEG
+
+?PR?MAIN?TEST11
+  +--> ?PR?_SEND_BYTE?TEST11
+  +--> ?PR?RECEIVE_BYTE?TEST11
+  +--> ?PR?_WRITE7279?TEST11
+
+?PR?_SEND_BYTE?TEST11
+  +--> ?PR?LONG_DELAY?TEST11
+  +--> ?PR?SHORT_DELAY?TEST11
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/20/2018  17:25:24  PAGE 2
+
+
+?PR?RECEIVE_BYTE?TEST11
+  +--> ?PR?LONG_DELAY?TEST11
+  +--> ?PR?SHORT_DELAY?TEST11
+
+?PR?_WRITE7279?TEST11
+  +--> ?PR?_SEND_BYTE?TEST11
+
+
+
+SYMBOL TABLE OF MODULE:  Test (TEST11)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TEST11
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:08E7H         PUBLIC        receive_byte
+  D:0090H         PUBLIC        P1
+  C:091EH         PUBLIC        _write7279
+  D:0008H         PUBLIC        digit
+  C:0928H         PUBLIC        long_delay
+  C:092FH         PUBLIC        short_delay
+  C:088CH         PUBLIC        main
+  D:000DH         PUBLIC        wait_cnter
+  D:0011H         PUBLIC        key_number
+  B:0090H.2       PUBLIC        dat
+  B:0090H.1       PUBLIC        clk
+  C:08BFH         PUBLIC        _send_byte
+  B:0090H.3       PUBLIC        key
+  D:0012H         PUBLIC        bm
+  D:0022H         PUBLIC        tmr
+  B:0090H.0       PUBLIC        cs
+  D:0024H         PUBLIC        mk
+  D:0025H         PUBLIC        j
+  D:0026H         PUBLIC        k
+  C:0936H         PUBLIC        _read7279
+  -------         PROC          LONG_DELAY
+  -------         DO            
+  D:0007H         SYMBOL        i
+  -------         ENDDO         
+  C:0928H         LINE#         19
+  C:0928H         LINE#         20
+  C:0928H         LINE#         22
+  C:092EH         LINE#         23
+  -------         ENDPROC       LONG_DELAY
+  -------         PROC          SHORT_DELAY
+  -------         DO            
+  D:0007H         SYMBOL        i
+  -------         ENDDO         
+  C:092FH         LINE#         25
+  C:092FH         LINE#         26
+  C:092FH         LINE#         28
+  C:0935H         LINE#         29
+  -------         ENDPROC       SHORT_DELAY
+  -------         PROC          _SEND_BYTE
+  D:0006H         SYMBOL        out_byte
+  -------         DO            
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/20/2018  17:25:24  PAGE 3
+
+
+  D:0005H         SYMBOL        i
+  -------         ENDDO         
+  C:08BFH         LINE#         31
+  C:08C1H         LINE#         32
+  C:08C1H         LINE#         34
+  C:08C3H         LINE#         35
+  C:08C6H         LINE#         36
+  C:08C8H         LINE#         37
+  C:08C8H         LINE#         38
+  C:08CCH         LINE#         39
+  C:08CCH         LINE#         40
+  C:08CEH         LINE#         41
+  C:08D0H         LINE#         43
+  C:08D0H         LINE#         44
+  C:08D2H         LINE#         45
+  C:08D2H         LINE#         46
+  C:08D4H         LINE#         47
+  C:08D7H         LINE#         48
+  C:08D9H         LINE#         49
+  C:08DCH         LINE#         50
+  C:08E0H         LINE#         51
+  C:08E4H         LINE#         52
+  C:08E6H         LINE#         53
+  -------         ENDPROC       _SEND_BYTE
+  -------         PROC          RECEIVE_BYTE
+  -------         DO            
+  D:0005H         SYMBOL        i
+  D:0006H         SYMBOL        in_byte
+  -------         ENDDO         
+  C:08E7H         LINE#         55
+  C:08E7H         LINE#         56
+  C:08E7H         LINE#         58
+  C:08E9H         LINE#         59
+  C:08ECH         LINE#         60
+  C:08EEH         LINE#         61
+  C:08EEH         LINE#         62
+  C:08F0H         LINE#         63
+  C:08F3H         LINE#         64
+  C:08F7H         LINE#         65
+  C:08FAH         LINE#         66
+  C:08FAH         LINE#         67
+  C:08FDH         LINE#         68
+  C:08FDH         LINE#         69
+  C:08FFH         LINE#         70
+  C:0902H         LINE#         71
+  C:0906H         LINE#         72
+  C:0908H         LINE#         73
+  C:090AH         LINE#         74
+  -------         ENDPROC       RECEIVE_BYTE
+  -------         PROC          _WRITE7279
+  D:0007H         SYMBOL        cmd
+  D:0004H         SYMBOL        dta
+  C:091EH         LINE#         76
+  C:0920H         LINE#         77
+  C:0920H         LINE#         78
+  C:0923H         LINE#         79
+  -------         ENDPROC       _WRITE7279
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/20/2018  17:25:24  PAGE 4
+
+
+  -------         PROC          _READ7279
+  D:0007H         SYMBOL        command
+  C:0936H         LINE#         82
+  C:0936H         LINE#         83
+  C:0936H         LINE#         84
+  C:0939H         LINE#         85
+  C:093CH         LINE#         86
+  -------         ENDPROC       _READ7279
+  -------         PROC          MAIN
+  -------         DO            
+  D:0007H         SYMBOL        keyboard
+  D:0006H         SYMBOL        i
+  D:0003H         SYMBOL        num
+  -------         ENDDO         
+  C:088CH         LINE#         88
+  C:088CH         LINE#         90
+  C:0891H         LINE#         91
+  C:0891H         LINE#         92
+  C:0894H         LINE#         93
+  C:0899H         LINE#         94
+  C:089CH         LINE#         96
+  C:089EH         LINE#         97
+  C:08A6H         LINE#         98
+  C:08A8H         LINE#         99
+  C:08AAH         LINE#         100
+  C:08AAH         LINE#         101
+  C:08AEH         LINE#         102
+  C:08B3H         LINE#         103
+  C:08BAH         LINE#         104
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        TEST11
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_READ7279?TEST11
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00B0H BYTE ( 8%) *
+******************************************************************************
+
+Program Size: data=40.0 xdata=0 code=320
+LINK/LOCATE RUN COMPLETE.  1 WARNING(S),  0 ERROR(S)
