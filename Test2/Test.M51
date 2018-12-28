@@ -1,0 +1,115 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        11/27/2018  02:17:50  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\PROGRAM FILES\KEIL\C51\BIN\BL51.EXE Test2.obj TO Test
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  Test2.obj (TEST2)
+  D:\PROGRAM FILES\KEIL\C51\LIB\C51S.LIB (?C_STARTUP)
+
+
+LINK MAP OF MODULE:  Test (TEST2)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0002H     UNIT         ?DT?TEST2
+            DATA    000AH     0001H     UNIT         _DATA_GROUP_
+                    000BH     0025H                  *** GAP ***
+            DATA    0030H     0020H     ABSOLUTE     
+            IDATA   0050H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     00ADH     UNIT         ?PR?MAIN?TEST2
+            CODE    00B0H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+OVERLAY MAP OF MODULE:   Test (TEST2)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?TEST2
+
+?PR?MAIN?TEST2                 000AH    0001H
+
+
+
+SYMBOL TABLE OF MODULE:  Test (TEST2)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TEST2
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  C:0003H         PUBLIC        main
+  D:0030H         PUBLIC        a
+  D:0008H         PUBLIC        i
+  D:0009H         PUBLIC        j
+  -------         PROC          MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/27/2018  02:17:50  PAGE 2
+
+
+  -------         DO            
+  D:000AH         SYMBOL        tmp
+  -------         ENDDO         
+  C:0003H         LINE#         10
+  C:0003H         LINE#         13
+  C:0006H         LINE#         14
+  C:0009H         LINE#         15
+  C:000CH         LINE#         16
+  C:000FH         LINE#         17
+  C:0012H         LINE#         18
+  C:0015H         LINE#         19
+  C:0018H         LINE#         20
+  C:001BH         LINE#         21
+  C:001EH         LINE#         22
+  C:0021H         LINE#         23
+  C:0024H         LINE#         24
+  C:0027H         LINE#         25
+  C:002AH         LINE#         26
+  C:002DH         LINE#         27
+  C:0030H         LINE#         28
+  C:0033H         LINE#         29
+  C:0036H         LINE#         30
+  C:0039H         LINE#         31
+  C:003CH         LINE#         32
+  C:003FH         LINE#         33
+  C:0042H         LINE#         34
+  C:0045H         LINE#         35
+  C:0048H         LINE#         36
+  C:004BH         LINE#         37
+  C:004EH         LINE#         38
+  C:0051H         LINE#         39
+  C:0054H         LINE#         40
+  C:0057H         LINE#         41
+  C:005AH         LINE#         42
+  C:005DH         LINE#         43
+  C:0060H         LINE#         44
+  C:0063H         LINE#         47
+  C:0066H         LINE#         48
+  C:0075H         LINE#         49
+  C:0086H         LINE#         50
+  C:008EH         LINE#         51
+  C:009CH         LINE#         52
+  C:00A3H         LINE#         53
+  C:00A3H         LINE#         54
+  C:00A7H         LINE#         55
+  C:00AEH         LINE#         57
+  -------         ENDPROC       MAIN
+  -------         ENDMOD        TEST2
+
+Program Size: data=44.0 xdata=0 code=188
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

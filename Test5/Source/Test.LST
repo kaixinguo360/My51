@@ -1,0 +1,92 @@
+A51 MACRO ASSEMBLER  TEST                                                                 11/27/2018 01:44:16 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02
+OBJECT MODULE PLACED IN Test.OBJ
+ASSEMBLER INVOKED BY: D:\Program Files\Keil\C51\BIN\A51.EXE Test.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 0130              2         AJMP MAIN        ;Ã¯◊™MAIN∫Ø 
+0030                   3     ORG 0030H
+                       4     
+0030                   5     MAIN:                ;≥ı ºªØ±‰¡ø
+0030 7820              6         MOV R0,#20H      ;R0 -  £”‡—≠ª∑¥Œ (20H -1)
+0032 7930              7         MOV R1,#30H      ;R1 -  æ›±£¥ÊŒª÷√(30H +1)
+0034 903000            8         MOV DPTR,#TABLE  ;DPTR - ±Ì∏Òµÿ÷∑
+0037 7A00              9         MOV R2,#00H      ;R2 - ±Ì∏Òƒ⁄∆´“∆(0 +1)
+                      10     
+0039                  11     GET:                 ;∂¡»°TABLE
+0039 EA               12         MOV A,R2         ;...
+003A 93               13         MOVC A,@A+DPTR   ;∂¡»°TABLE÷–R2Œª÷√ æ›
+003B F7               14         MOV @R1,A        ;±£¥Ê¥À æ›µΩ@R1
+003C 09               15         INC R1           ;R1 +1
+003D 0A               16         INC R2           ;R2 +1
+003E D8F9             17         DJNZ R0,GET      ;»Áπ˚ £”‡—≠ª∑¥Œ ≤ªŒ™0, ‘Ú÷ÿ∏¥GET
+                      18     
+0040 7B1F             19         MOV R3,#1FH      ;R3 - ƒ⁄≤„—≠ª∑¥Œ 
+0042 7C1F             20         MOV R4,#1FH      ;R4 - Õ‚≤„—≠ª∑¥Œ 
+0044 7930             21         MOV R1,#30H      ;R1 -  æ›÷∏’Î
+                      22     
+                      23     
+0046                  24     L1:
+0046 C3               25         CLR C            ;«Â≥Ω¯Œª±Í÷æ
+0047 E7               26         MOV A,@R1        ;∂¡»°R1÷∏’ÎÀ˘÷∏ æµƒ æ›µΩA
+0048 FD               27         MOV R5,A         ;‘›¥ÊAµΩR5
+0049 09               28         INC R1           ;R1 +1
+004A 97               29         SUBB A,@R1       ;º∆À„A-@R1, ΩËŒªΩ·π˚±£¥ÊµΩC
+004B ED               30         MOV A,R5         ;ª÷∏¥AŒ™R5
+004C 4004             31         JC L2            ;»Áπ˚C=1(A<@R1), ‘ÚºÃ–¯‘À––
+                      32     
+                      33                          ;»Áπ˚C=0(A>=@R1), ‘ÚΩªªªR1”ÎR1-1
+004E C7               34         XCH A,@R1        ;Ωªªª: A<->R1
+004F 19               35         DEC R1           ;R1 -1
+0050 F7               36         MOV @R1,A        ;MOV: µ±«∞¥¶¿Ìµƒ æ› -> R1
+0051 09               37         INC R1           ;R1 +1
+                      38     
+0052                  39     L2:
+0052 DBF2             40         DJNZ R3,L1       ;»Áπ˚ƒ⁄≤„ £”‡—≠ª∑¥Œ ≤ªŒ™¡„, ‘ÚºÃ–¯—≠ª∑
+                      41     
+                      42                          ;»Áπ˚ƒ⁄≤„ £”‡—≠ª∑¥Œ Œ™¡„, ‘Úµ˜’˚≤Œ ÷ÿ–¬ø™ ºƒ⁄≤„—≠ª∑
+0054 8CF0             43         MOV B,R4         ;...
+0056 ABF0             44         MOV R3,B         ;...
+0058 1B               45         DEC R3           ;ƒ⁄≤„—≠ª∑¥Œ  = Õ‚≤„—≠ª∑¥Œ  - 1
+0059 7930             46         MOV R1,#30H      ;ª÷∏¥ æ›÷∏’ÎµΩ30H
+005B DCE9             47         DJNZ R4,L1       ;»Áπ˚Õ‚≤„ £”‡—≠ª∑¥Œ ≤ªŒ™¡„, ‘ÚºÃ–¯—≠ª∑
+                      48     
+3000                  49     ORG 3000H
+3000                  50     TABLE:
+3000 01030902         51         DB 1,3,9,2,17,4,11,6
+3004 11040B06                
+3008 05146440         52         DB 5,20,100,64,21,14,79,35
+300C 150E4F23                
+3010 5C075B17         53         DB 92,7,91,23,65,16,13,18
+3014 41100D12                
+3018 12494165         54         DB 18,73,65,101,27,19,62,69
+301C 1B133E45                
+A51 MACRO ASSEMBLER  TEST                                                                 11/27/2018 01:44:16 PAGE     2
+
+                      55     
+3020 80FE             56     SJMP $
+                      57     END
+A51 MACRO ASSEMBLER  TEST                                                                 11/27/2018 01:44:16 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+GET. . . . . . . .  C ADDR   0039H   A   
+L1 . . . . . . . .  C ADDR   0046H   A   
+L2 . . . . . . . .  C ADDR   0052H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+TABLE. . . . . . .  C ADDR   3000H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

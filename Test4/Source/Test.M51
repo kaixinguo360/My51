@@ -1,0 +1,102 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        11/27/2018  09:17:39  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+D:\PROGRAM FILES\KEIL\C51\BIN\BL51.EXE Test4.obj TO Test
+
+
+INPUT MODULES INCLUDED:
+  Test4.obj (TEST4)
+
+
+LINK MAP OF MODULE:  Test (TEST4)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0096H     ABSOLUTE     
+
+
+
+SYMBOL TABLE OF MODULE:  Test (TEST4)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        TEST4
+  C:008DH         SYMBOL        DL1
+  C:0081H         SYMBOL        DL10S
+  C:008BH         SYMBOL        DL2
+  C:0089H         SYMBOL        DL2S
+  C:0083H         SYMBOL        DL5
+  C:0033H         SYMBOL        LOOP
+  C:0030H         SYMBOL        MAIN
+  D:0081H         SYMBOL        SP
+  C:004DH         SYMBOL        STATUS1
+  C:005AH         SYMBOL        STATUS2
+  C:0067H         SYMBOL        STATUS3
+  C:0074H         SYMBOL        STATUS4
+  N:FE00H         SYMBOL        U4
+  N:FD00H         SYMBOL        U5
+  C:0000H         LINE#         2
+  C:0030H         LINE#         6
+  C:0033H         LINE#         9
+  C:0036H         LINE#         10
+  C:0039H         LINE#         11
+  C:003CH         LINE#         12
+  C:003FH         LINE#         13
+  C:0042H         LINE#         14
+  C:0045H         LINE#         15
+  C:0048H         LINE#         16
+  C:004BH         LINE#         17
+  C:004DH         LINE#         20
+  C:004FH         LINE#         21
+  C:0052H         LINE#         22
+  C:0053H         LINE#         23
+  C:0055H         LINE#         24
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/27/2018  09:17:39  PAGE 2
+
+
+  C:0058H         LINE#         25
+  C:0059H         LINE#         26
+  C:005AH         LINE#         29
+  C:005CH         LINE#         30
+  C:005FH         LINE#         31
+  C:0060H         LINE#         32
+  C:0062H         LINE#         33
+  C:0065H         LINE#         34
+  C:0066H         LINE#         35
+  C:0067H         LINE#         38
+  C:0069H         LINE#         39
+  C:006CH         LINE#         40
+  C:006DH         LINE#         41
+  C:006FH         LINE#         42
+  C:0072H         LINE#         43
+  C:0073H         LINE#         44
+  C:0074H         LINE#         47
+  C:0076H         LINE#         48
+  C:0079H         LINE#         49
+  C:007AH         LINE#         50
+  C:007CH         LINE#         51
+  C:007FH         LINE#         52
+  C:0080H         LINE#         53
+  C:0081H         LINE#         56
+  C:0083H         LINE#         58
+  C:0086H         LINE#         59
+  C:0088H         LINE#         60
+  C:0089H         LINE#         63
+  C:008BH         LINE#         65
+  C:008DH         LINE#         67
+  C:008FH         LINE#         68
+  C:0091H         LINE#         69
+  C:0093H         LINE#         70
+  C:0095H         LINE#         71
+  -------         ENDMOD        TEST4
+
+Program Size: data=8.0 xdata=0 code=150
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

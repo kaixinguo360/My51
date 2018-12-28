@@ -1,0 +1,136 @@
+A51 MACRO ASSEMBLER  TEST5                                                                12/06/2018 14:41:00 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02
+OBJECT MODULE PLACED IN Test5.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE Test5.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 0130              2             AJMP MAIN
+                       3     
+0030                   4     ORG 0030H
+0030                   5     MAIN:
+0030 758160            6             MOV SP, #60H      ;ÉèÖÃ¶ÑÕ»Ö¸Õë
+0033 7800              7             MOV R0, #0        ;¸öÎ» = 0
+0035 7901              8             MOV R1, #1        ;Ê®Î» = 1
+0037 C2D5              9             CLR F0
+0039 D2B0             10             SETB P3.0         ;P3.0È«²¿ÖÃ1, LEDµÆÏ¨Ãð
+                      11     
+003B                  12     LOOP:
+003B 20910B           13             JB P1.1, LOOP2    ;Èç¹ûP1.1=1(RESET), Ìø×ªµ½LOOP2£¬·ñÔò¼ÌÐøÖ´ÐÐ
+003E                  14     LOOP1:                ;Èç¹û P1.1²»Îª1(RESET°´ÏÂÊ±)£¬ÔòÖ´ÐÐ£¬×°ÔØ³õÖµ£¬Ë¢ÐÂÏÔÊ¾£¬¹ØµôLED1
+003E C2D5             15             CLR F0
+0040 8830             16             MOV 30H, R0
+0042 8931             17             MOV 31H, R1       ;×°ÔØ³õÖµ
+0044 D2B0             18             SETB P3.0         ;¹Ø±ÕLED1
+0046 12006B           19             LCALL DISPLAY     ;ÏÔÊ¾
+0049                  20     LOOP2:
+0049 2090EF           21             JB P1.0, LOOP     ;Èç¹ûP1.0=1(START)£¬Ìø»ØLOOP£¬·ñÔò¼ÌÐøÖ´ÐÐ
+004C                  22     LOOP3:                ;Èç¹û P1.0²»Îª1(START°´ÏÂÊ±)£¬ÔòÖ´ÐÐ£¬¿ªÊ¼µ¹¼ÆÊ±
+004C 12006B           23             LCALL DISPLAY     ;µ÷ÓÃÏÔÊ¾×Ó³ÌÐò
+004F 120095           24             LCALL DL1S        ;ÑÓÊ±1s
+0052 120080           25             LCALL ADJUST      ;µ÷ÓÃµ÷ÕûÊ£ÓàÊ±¼ä×Ó³ÌÐò
+0055 20D503           26             JB F0, LOOP4      ;Èç¹ûF0=1, Ìø×ªµ½LOOP4
+0058 02004C           27             LJMP LOOP3        ;Èç¹ûF0=0, ¼ÌÐøLOOP3
+                      28     
+005B                  29     LOOP4:                ;LEDÉÁË¸³ÌÐò
+005B C2B0             30             CLR P3.0          ;µãÁÁLED
+005D 1200A2           31             LCALL DL100MS     ;ÑÓÊ±100ms
+0060 D2B0             32             SETB P3.0         ;Ï¨ÃðLED
+0062 1200A2           33             LCALL DL100MS     ;ÑÓÊ±100ms
+0065 2091F3           34             JB P1.1, LOOP4    ;Èç¹ûP1.1=1, ¼ÌÐøLOOP4, ¼ÌÐøÉÁË¸
+0068 02003E           35             LJMP LOOP1        ;Èç¹ûP1.1=0, Ìø×ªµ½LOOP1, ½áÊøÉÁË¸
+                      36     
+006B                  37     DISPLAY:              ;ÏÔÊ¾×Ó³ÌÐò   
+006B E530             38             MOV A, 30H
+006D 9000AB           39             MOV DPTR, #TABLE
+0070 93               40             MOVC A, @A+DPTR   ;¶ÁÈ¡¸öÎ»Ê×Ö¶ÔÓ¦±àÂë
+0071 90FE00           41             MOV DPTR, #U1
+0074 F0               42             MOVX @DPTR, A     ;U1 = ¸öÎ»Ê×Ö¶ÔÓ¦±àÂë
+0075 E531             43             MOV A, 31H
+0077 9000AB           44             MOV DPTR, #TABLE
+007A 93               45             MOVC A, @A+DPTR   ;¶ÁÈ¡Ê®Î»Ê×Ö¶ÔÓ¦±àÂë
+007B 90FD00           46             MOV DPTR, #U10
+007E F0               47             MOVX @DPTR, A     ;U1 = Ê®Î»Ê×Ö¶ÔÓ¦±àÂë
+007F 22               48             RET
+                      49     
+0080                  50     ADJUST:
+0080 1530             51             DEC 30H           ;¸öÎ»Ê×Ö - 1
+0082 E530             52             MOV A, 30H
+0084 B4FF0D           53             CJNE A, #-1, GORET;Èç¹û(¸öÎ»Ê×Ö != -1), Ôò·µ»Ø
+0087 753009           54             MOV 30H, #9       ;Èç¹û(¸öÎ»Ê×Ö == -1), Éè¸öÎ»Ê×ÖÎª9, ²¢¼ÌÐøÔËÐÐ
+008A 1531             55             DEC 31H           ;Ê®Î»Ê×Ö - 1
+008C E531             56             MOV A, 31H
+008E B4FF03           57             CJNE A, #-1, GORET;Èç¹û(Ê®Î»Ê×Ö != -1), Ôò·µ»Ø
+0091 D2D5             58             SETB F0           ;Èç¹û(Ê®Î»Ê×Ö == -1), Éè°ÑF0ÉèÎª1
+A51 MACRO ASSEMBLER  TEST5                                                                12/06/2018 14:41:00 PAGE     2
+
+0093 22               59             RET
+0094                  60     GORET:
+0094 22               61             RET
+                      62     
+0095                  63     DL1S:                 ;ÈÖØÑ­»·ÑÓÊ±1s×Ó³ÌÐò
+0095 7F0A             64         MOV R7, #10
+0097                  65     DL2:
+0097 7EC8             66         MOV R6, #200
+0099                  67     DL1:
+0099 7DFA             68         MOV R5, #250
+009B DDFE             69         DJNZ R5, $
+009D DEFA             70             DJNZ R6, DL1
+009F DFF6             71             DJNZ R7, DL2
+00A1 22               72             RET
+                      73     
+00A2                  74     DL100MS:              ;Á½ÖØÑ­»·ÑÓÊ±100ms×Ó³ÌÐò
+00A2 7FC8             75         MOV R7, #200
+00A4                  76     DL:
+00A4 7EFA             77         MOV R6, #250
+00A6 DEFE             78         DJNZ R6, $
+00A8 DFFA             79         DJNZ R7, DL
+00AA 22               80         RET
+                      81     
+00AB                  82     TABLE:
+00AB C0F9A4B0         83         DB 0C0H, 0f9H, 0A4H, 0B0H, 99H, 92H, 82H, 0F8H, 80H, 90H
+00AF 999282F8                
+00B3 8090                    
+                      84     
+  FE00                85     U1 EQU 0FE00H   ;¸öÎ»ÊÂë¹ÜµÄµØÖ·
+  FD00                86     U10 EQU 0FD00H  ;Ê®Î»ÊÂë¹ÜµÄµØÖ·
+                      87     
+                      88     END
+A51 MACRO ASSEMBLER  TEST5                                                                12/06/2018 14:41:00 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ADJUST . . . . . .  C ADDR   0080H   A   
+DISPLAY. . . . . .  C ADDR   006BH   A   
+DL . . . . . . . .  C ADDR   00A4H   A   
+DL1. . . . . . . .  C ADDR   0099H   A   
+DL100MS. . . . . .  C ADDR   00A2H   A   
+DL1S . . . . . . .  C ADDR   0095H   A   
+DL2. . . . . . . .  C ADDR   0097H   A   
+F0 . . . . . . . .  B ADDR   00D0H.5 A   
+GORET. . . . . . .  C ADDR   0094H   A   
+LOOP . . . . . . .  C ADDR   003BH   A   
+LOOP1. . . . . . .  C ADDR   003EH   A   
+LOOP2. . . . . . .  C ADDR   0049H   A   
+LOOP3. . . . . . .  C ADDR   004CH   A   
+LOOP4. . . . . . .  C ADDR   005BH   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+TABLE. . . . . . .  C ADDR   00ABH   A   
+U1 . . . . . . . .  N NUMB   FE00H   A   
+U10. . . . . . . .  N NUMB   FD00H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

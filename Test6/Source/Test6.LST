@@ -1,0 +1,138 @@
+A51 MACRO ASSEMBLER  TEST6                                                                12/06/2018 14:54:49 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02
+OBJECT MODULE PLACED IN Test6.OBJ
+ASSEMBLER INVOKED BY: C:\Keil\C51\BIN\A51.EXE Test6.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 0130              2         AJMP MAIN
+                       3     
+0030                   4     ORG 0030H
+0030                   5     MAIN:
+0030 758160            6         MOV SP, #60H   ;ÉèÖÃ¶ÑÕ»Ö¸Õë
+0033 7580FF            7         MOV P0, #0FFH  ;ÉèP0Îª¸ßµçÆ½(µÍµçÆ½ÓÐÐ§)
+0036 7590FF            8         MOV P1, #0FFH  ;ÉèP1Îª¸ßµçÆ½(µÍµçÆ½ÓÐÐ§)
+0039 7F0A              9         MOV R7, #10    ;ËÙ¶È±äÁ¿
+003B 7CEF             10         MOV R4, #0EFH  ;ËÙ¶ÈÖ¸Ê¾µÆ±äÁ¿
+                      11     
+003D 120086           12         LCALL SCAN     ;µ÷ÓÃSCAN×Ó³ÌÐò
+0040 80EE             13         JMP MAIN
+                      14     
+0042                  15     BUTTON0:           ;Õ×ª
+0042 753000           16         MOV 30H, #0H   ;(30H) = 0
+0045 7590FE           17         MOV P1, #0FEH
+0048 801E             18         JMP Z_ZHANG    ;Ìø×ªµ½Õ×ªÓï¾ä
+                      19     
+004A                  20     BUTTON1:           ;·´×ª
+004A 753001           21         MOV 30H,#1H    ;(30H) = 1
+004D 7590FE           22         MOV P1,#0FEH        
+0050 8025             23         JMP Z_FAN      ;Ìø×ªµ½·´×ªÓï¾ä
+                      24     
+0052                  25     BUTTON2:           ;¼ÓËÙ
+0052 1F               26         DEC R7         ;R7 = R7-1
+0053 1F               27         DEC R7         ;R7 = R7-1
+0054 EC               28         MOV A,R4       ;...
+0055 03               29         RR A           ;...
+0056 FC               30         MOV R4,A       ;ÒÆ¶¯ËÙ¶ÈÖ¸Ê¾µÆ±äÁ¿
+0057 E530             31         MOV A,30H      ;...
+0059 600D             32         JZ Z_ZHANG     ;Èô(30H)=0, ÔòÌø×ªµ½Õ×ªÓï¾ä
+005B 801A             33         JMP Z_FAN      ;Èô(30H)=1, ÔòÌø×ªµ½·´×ªÓï¾ä
+                      34     
+005D                  35     BUTTON3:           ;¼õËÙ
+005D 0F               36         INC R7         ;R7 = R7+1
+005E 0F               37         INC R7         ;R7 = R7+1
+005F EC               38         MOV A,R4       ;...
+0060 23               39         RL A           ;...
+0061 FC               40         MOV R4,A       ;ÒÆ¶¯ËÙ¶ÈÖ¸Ê¾µÆ±äÁ¿
+0062 E530             41         MOV A,30H
+0064 6002             42         JZ Z_ZHANG     ;Èô(30H)=0, ÔòÌø×ªµ½Õ×ªÓï¾ä
+0066 800F             43         JMP Z_FAN      ;Èô(30H)=1, ÔòÌø×ªµ½·´×ªÓï¾ä
+                      44     
+0068                  45     Z_ZHANG:        
+0068 8C80             46         MOV P0,R4
+006A 1200A6           47         LCALL DLS      ;µ÷ÓÃÑÓÊ±×Ó³ÌÐò
+006D E590             48         MOV A,P1
+006F 23               49         RL A           ;×óÒÆÒ»Î»
+0070 F590             50         MOV P1,A       ;...
+0072 120086           51         LCALL SCAN     ;µ÷ÓÃSCAN×Ó³ÌÐò
+0075 80F1             52         JMP Z_ZHANG    ;Ìø×ªµ½Õ×ªÓï¾ä, ¼ÌÐøÕ×ª
+                      53     
+0077                  54     Z_FAN:  
+0077 8C80             55         MOV P0,R4
+0079 1200A6           56         LCALL DLS      ;µ÷ÓÃÑÓÊ±×Ó³ÌÐò
+007C E590             57         MOV A,P1
+007E 03               58         RR A           ;ÓÒÒÆÒ»Î»
+A51 MACRO ASSEMBLER  TEST6                                                                12/06/2018 14:54:49 PAGE     2
+
+007F F590             59         MOV P1,A
+0081 120086           60         LCALL SCAN     ;µ÷ÓÃSCAN×Ó³ÌÐò
+0084 80F1             61         JMP Z_FAN      ;Ìø×ªµ½·´×ªÓï¾ä, ¼ÌÐø·´×ª
+                      62     
+0086                  63     SCAN:                 ;É¨Ãè·¨¶ÁÈ¡ÊäÈë×Ó³ÌÐò£¬½«È«²¿ÐÐÏßÖÃµÍµçÆ½£¬¼ì²âÁÐÏßµÄ×´Ì¬£¬Ö»ÒªÓÐÒ»ÁÐ
+                             µçÆ½ÎªµÍ£¬Ôò±íÊ¾¼üÅÌÖÐÓÐ¼ü°´ÏÂ
+0086 75B030           64         MOV P3, #030H
+0089 30B405           65         JNB P3.4, NEXT1
+008C 30B50D           66         JNB P3.5, NEXT2
+008F 8014             67         JMP GORET
+0091                  68     NEXT1:            
+0091 75B003           69         MOV P3, #3H
+0094 30B0AB           70         JNB P3.0, BUTTON0
+0097 30B1B8           71         JNB P3.1, BUTTON2
+009A 8009             72         JMP GORET
+009C                  73     NEXT2:            
+009C 75B003           74         MOV P3, #3H
+009F 30B0A8           75         JNB P3.0, BUTTON1
+00A2 30B1B8           76         JNB P3.1, BUTTON3
+00A5                  77     GORET:
+00A5 22               78         RET
+                      79     
+00A6                  80     DLS:               ;ÑÓÊ±×Ó³ÌÐò
+00A6 EF               81         MOV A,R7       ;t = (2 * 250) * 200 * R7 = 1000,000 * R7 = 1s * R7
+00A7                  82     DL2:
+00A7 7EC8             83         MOV R6,#200
+00A9                  84     DL1:
+00A9 7DFA             85         MOV R5,#250
+00AB                  86     DL0:
+00AB DDFE             87         DJNZ R5,DL0
+00AD DEFA             88         DJNZ R6,DL1
+00AF DFF6             89         DJNZ R7,DL2
+00B1 FF               90         MOV R7,A
+00B2 22               91         RET
+                      92     
+                      93     END
+A51 MACRO ASSEMBLER  TEST6                                                                12/06/2018 14:54:49 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+BUTTON0. . . . . .  C ADDR   0042H   A   
+BUTTON1. . . . . .  C ADDR   004AH   A   
+BUTTON2. . . . . .  C ADDR   0052H   A   
+BUTTON3. . . . . .  C ADDR   005DH   A   
+DL0. . . . . . . .  C ADDR   00ABH   A   
+DL1. . . . . . . .  C ADDR   00A9H   A   
+DL2. . . . . . . .  C ADDR   00A7H   A   
+DLS. . . . . . . .  C ADDR   00A6H   A   
+GORET. . . . . . .  C ADDR   00A5H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+NEXT1. . . . . . .  C ADDR   0091H   A   
+NEXT2. . . . . . .  C ADDR   009CH   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+SCAN . . . . . . .  C ADDR   0086H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+Z_FAN. . . . . . .  C ADDR   0077H   A   
+Z_ZHANG. . . . . .  C ADDR   0068H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,115 @@
+A51 MACRO ASSEMBLER  TEST4                                                                11/27/2018 09:17:38 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02
+OBJECT MODULE PLACED IN Test4.OBJ
+ASSEMBLER INVOKED BY: D:\Program Files\Keil\C51\BIN\A51.EXE Test4.asm SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 0130              2             AJMP MAIN
+                       3     
+0030                   4     ORG 0030H
+0030                   5     MAIN:
+0030 758160            6         MOV SP, #60H   ;…Ë÷√∂—’ª÷∏’Î
+                       7     
+0033                   8     LOOP:
+0033 12004D            9         LCALL STATUS1  ;µ˜”√STATUS1
+0036 120081           10         LCALL DL10S    ;—” ±10s
+0039 12005A           11         LCALL STATUS2  ;µ˜”√STATUS2
+003C 120089           12         LCALL DL2S     ;—” ±2s
+003F 120067           13         LCALL STATUS3  ;µ˜”√STATUS3
+0042 120081           14         LCALL DL10S    ;—” ±10s
+0045 120074           15         LCALL STATUS4  ;µ˜”√STATUS4
+0048 120089           16         LCALL DL2S     ;—” ±2s
+004B 80E6             17         SJMP LOOP      ;ºÃ–¯—≠ª∑
+                      18     
+004D                  19     STATUS1:
+004D 74F3             20         MOV A, #0F3H
+004F 90FE00           21             MOV DPTR, #U4
+0052 F0               22             MOVX @DPTR, A  ;@U4 = #0F3H
+0053 740C             23             MOV A, #0CH
+0055 90FD00           24             MOV DPTR, #U5
+0058 F0               25             MOVX @DPTR, A  ;@U5 = #0CH
+0059 22               26             RET
+                      27     
+005A                  28     STATUS2:
+005A 74C3             29             MOV A, #0C3H
+005C 90FE00           30             MOV DPTR, #U4
+005F F0               31             MOVX @DPTR, A  ;@U4 = #0C3H
+0060 740F             32         MOV A, #0FH
+0062 90FD00           33             MOV DPTR, #U5
+0065 F0               34             MOVX @DPTR, A  ;@U5 = #0FH
+0066 22               35             RET
+                      36     
+0067                  37     STATUS3:
+0067 74FC             38         MOV A, #0FCH
+0069 90FE00           39             MOV DPTR, #U4
+006C F0               40             MOVX @DPTR, A  ;@U4 = #0FCH
+006D 7403             41             MOV A, #03H
+006F 90FD00           42             MOV DPTR, #U5
+0072 F0               43             MOVX @DPTR, A  ;@U5 = #03H
+0073 22               44             RET
+                      45     
+0074                  46     STATUS4:
+0074 743C             47             MOV A, #3CH
+0076 90FE00           48             MOV DPTR, #U4
+0079 F0               49             MOVX @DPTR, A  ;@U4 = #3CH
+007A 740F             50         MOV A, #0FH
+007C 90FD00           51             MOV DPTR, #U5
+007F F0               52             MOVX @DPTR, A  ;@U5 = #0FH
+0080 22               53             RET
+                      54     
+0081                  55     DL10S:             ;—” ±10s◊”≥Ã–Ú
+0081 7905             56         MOV R1, #5     ;º¥µ˜”√5¥Œ—” ±2s◊”≥Ã–Ú
+0083                  57     DL5:
+0083 120089           58         LCALL DL2S
+A51 MACRO ASSEMBLER  TEST4                                                                11/27/2018 09:17:38 PAGE     2
+
+0086 D9FB             59         DJNZ R1, DL5
+0088 22               60         RET
+                      61     
+0089                  62     DL2S:              ;»÷ÿ—≠ª∑—” ±2s◊”≥Ã–Ú
+0089 7F14             63         MOV R7, #20    ;t = ((2 * 250) * 200) * 20 = 2,000,000 us = 2s
+008B                  64     DL2:
+008B 7EC8             65         MOV R6, #200
+008D                  66     DL1:
+008D 7DFA             67         MOV R5, #250
+008F DDFE             68             DJNZ R5, $
+0091 DEFA             69             DJNZ R6, DL1
+0093 DFF6             70             DJNZ R7, DL2
+0095 22               71             RET
+                      72     
+  FE00                73     U4 EQU 0FE00H      ;U4 = 0FE00H
+  FD00                74     U5 EQU 0FD00H      ;U5 = 0FD00H
+                      75     
+                      76     END
+A51 MACRO ASSEMBLER  TEST4                                                                11/27/2018 09:17:38 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DL1. . . . . . . .  C ADDR   008DH   A   
+DL10S. . . . . . .  C ADDR   0081H   A   
+DL2. . . . . . . .  C ADDR   008BH   A   
+DL2S . . . . . . .  C ADDR   0089H   A   
+DL5. . . . . . . .  C ADDR   0083H   A   
+LOOP . . . . . . .  C ADDR   0033H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+STATUS1. . . . . .  C ADDR   004DH   A   
+STATUS2. . . . . .  C ADDR   005AH   A   
+STATUS3. . . . . .  C ADDR   0067H   A   
+STATUS4. . . . . .  C ADDR   0074H   A   
+U4 . . . . . . . .  N NUMB   FE00H   A   
+U5 . . . . . . . .  N NUMB   FD00H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
